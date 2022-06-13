@@ -12,3 +12,31 @@
       background-color: #008df1;
    }
 }
+
+.wrapper {
+   padding: 0.4rem 0rem;
+   color: var(--black);
+   border: none;
+   border-radius: 0.2rem;
+   font-size: 1rem;
+   transition: all 0.3s ease;
+   border: 1px solid var(--primaryBlue);
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+
+.counter {
+   padding: 0.4rem 1.4rem;
+   background-color: var(--primaryBlue);
+   color: var(--white);
+   border: none;
+   border-radius: 0.2rem;
+   font-size: 1rem;
+   transition: all 0.3s ease;
+   cursor: pointer;
+
+   &:hover {
+      background-color: #008df1;
+   }
+}
