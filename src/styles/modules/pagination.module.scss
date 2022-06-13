@@ -1,0 +1,59 @@
+.wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 4rem 0 1rem;
+
+   .icon__wrapper {
+      color: var(--primaryBlue);
+      border: 1px solid var(--primaryBlue);
+      border-radius: 50%;
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+         background-color: var(--primaryBlue);
+         color: var(--white);
+      }
+   }
+
+   .page__item {
+      color: var(--primaryBlue);
+      border: 1px solid var(--primaryBlue);
+      border-radius: 50%;
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+
+      &:hover {
+         background-color: var(--primaryBlue);
+         color: var(--white);
+      }
+   }
+
+   .active {
+      background-color: var(--primaryBlue);
+      color: var(--white);
+      border-radius: 50%;
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+   }
+}

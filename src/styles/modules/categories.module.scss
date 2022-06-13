@@ -1,19 +1,24 @@
-.list {
+.categories__list {
    display: flex;
    justify-items: flex-start;
    align-items: center;
+   flex-wrap: wrap;
 }
 
-li {
+.categories__item {
    margin-right: 1rem;
-   list-style: none;
-   cursor: pointer;
+   margin-bottom: 1rem;
    background-color: var(--bg);
    padding: 0.5rem 1.2rem;
    border-radius: 2rem;
 }
 
 .active {
+   margin-right: 1rem;
+   margin-bottom: 1rem;
+   padding: 0.5rem 1.2rem;
+   border-radius: 2rem;
    background-color: var(--black);
    color: var(--white);
 }
+

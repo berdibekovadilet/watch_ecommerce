@@ -1,6 +1,6 @@
 .app_wrapper {
-   height: 100vh;
-   margin-top: 4rem;
+   min-height: 100vh;
+   margin: 4rem 0;
    padding: 3rem;
 }
 
@@ -8,4 +8,16 @@
    margin: 3rem 0;
    display: flex;
    justify-content: space-between;
+   align-items: center;
+}
+
+.section__title{
+   font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+   .section_wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+   }
 }

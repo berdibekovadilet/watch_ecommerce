@@ -1,0 +1,27 @@
+.product__container {
+   max-width: 20rem;
+   padding: 2rem 3rem;
+   text-align: center;
+}
+
+.product__img {
+   max-width: 15rem;
+   max-height: 20rem;
+   object-fit: cover;
+   padding: 1rem;
+   transition: all 0.3s ease;
+   cursor: pointer;
+
+   &:hover {
+      transform: scale(1.1);
+   }
+}
+
+.product__title {
+   margin: 1rem 0;
+   font-size: 1rem;
+}
+
+.product__price {
+   margin-bottom: 1rem;
+}
