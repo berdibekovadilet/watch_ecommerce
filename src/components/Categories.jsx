@@ -3,30 +3,12 @@ import styles from "../styles/modules/categories.module.scss";
 
 const Categories = () => {
   const categories = [
-    {
-      id: 0,
-      name: "ВСЕ",
-    },
-    {
-      id: 1,
-      name: "G-SHOCK",
-    },
-    {
-      id: 2,
-      name: "BABY-G",
-    },
-    {
-      id: 3,
-      name: "EDIFICE",
-    },
-    {
-      id: 4,
-      name: "SHEEN",
-    },
-    {
-      id: 5,
-      name: "VINTAGE",
-    },
+    "ВСЕ",
+    "G-SHOCK",
+    "BABY-G",
+    "EDIFICE",
+    "SHEEN",
+    "VINTAGE",
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -36,13 +18,13 @@ const Categories = () => {
 
   return (
     <ul className={styles.categories__list}>
-      {categories.map((category) => (
+      {categories.map((category, i) => (
         <li
-          key={category.id}
-          onClick={() => handleClick(category.id)}
-          className={activeIndex === category.id ? styles.active : styles.item}
+          key={i}
+          onClick={() => handleClick(i)}
+          className={activeIndex === i ? styles.active : styles.item}
         >
-          {category.name}
+          {category}
         </li>
       ))}
     </ul>

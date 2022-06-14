@@ -5,30 +5,12 @@ import styles from "../styles/modules/sort.module.scss";
 
 const Sort = () => {
   const sortArr = [
-    {
-      id: 0,
-      name: "популярности (возр)",
-    },
-    {
-      id: 1,
-      name: "популярности (убыв)",
-    },
-    {
-      id: 2,
-      name: "цене (возр)",
-    },
-    {
-      id: 3,
-      name: "цене (убыв)",
-    },
-    {
-      id: 4,
-      name: "алфавиту (возр)",
-    },
-    {
-      id: 5,
-      name: "алфавиту (убыв)",
-    },
+    "популярности (возр)",
+    "популярности (убыв)",
+    "цене (возр)",
+    "цене (убыв)",
+    "алфавиту (возр)",
+    "алфавиту (убыв)",
   ];
 
   const [modal, setModal] = useState(false);
@@ -48,13 +30,13 @@ const Sort = () => {
       {modal && (
         <div className={styles.sort__popup}>
           <ul>
-            {sortArr.map((item) => (
+            {sortArr.map((item, i) => (
               <li
-                key={item.id}
-                onClick={() => handleClick(item.id)}
-                className={indexActive === item.id ? styles.active : ""}
+                key={i}
+                onClick={() => handleClick(i)}
+                className={indexActive === i ? styles.active : ""}
               >
-                {item.name}
+                {item}
               </li>
             ))}
           </ul>
