@@ -4,6 +4,33 @@ import { BsFillCaretUpFill } from "react-icons/bs";
 import styles from "../styles/modules/sort.module.scss";
 
 const Sort = () => {
+  const sortArr = [
+    {
+      id: 0,
+      name: "популярности (возр)",
+    },
+    {
+      id: 1,
+      name: "популярности (убыв)",
+    },
+    {
+      id: 2,
+      name: "цене (возр)",
+    },
+    {
+      id: 3,
+      name: "цене (убыв)",
+    },
+    {
+      id: 4,
+      name: "алфавиту (возр)",
+    },
+    {
+      id: 5,
+      name: "алфавиту (убыв)",
+    },
+  ];
+
   const [modal, setModal] = useState(false);
   const [indexActive, setIndexActive] = useState(0);
 
@@ -21,42 +48,15 @@ const Sort = () => {
       {modal && (
         <div className={styles.sort__popup}>
           <ul>
-            <li
-              onClick={() => handleClick(0)}
-              className={indexActive === 0 ? styles.active : ""}
-            >
-              популярности (возр)
-            </li>
-            <li
-              onClick={() => handleClick(1)}
-              className={indexActive === 1 ? styles.active : ""}
-            >
-              популярности (убыв)
-            </li>
-            <li
-              onClick={() => handleClick(2)}
-              className={indexActive === 2 ? styles.active : ""}
-            >
-              цене (возр)
-            </li>
-            <li
-              onClick={() => handleClick(3)}
-              className={indexActive === 3 ? styles.active : ""}
-            >
-              цене (убыв)
-            </li>
-            <li
-              onClick={() => handleClick(4)}
-              className={indexActive === 4 ? styles.active : ""}
-            >
-              алфавиту (возр)
-            </li>
-            <li
-              onClick={() => handleClick(5)}
-              className={indexActive === 5 ? styles.active : ""}
-            >
-              алфавиту (убыв)
-            </li>
+            {sortArr.map((item) => (
+              <li
+                key={item.id}
+                onClick={() => handleClick(item.id)}
+                className={indexActive === item.id ? styles.active : ""}
+              >
+                {item.name}
+              </li>
+            ))}
           </ul>
         </div>
       )}
