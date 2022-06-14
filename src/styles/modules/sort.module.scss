@@ -16,6 +16,10 @@
       border-bottom: 1px dashed var(--primaryBlue);
       color: var(--primaryBlue);
       cursor: pointer;
+
+      &:hover {
+         color: #007bd3;
+      }
    }
 }
 
