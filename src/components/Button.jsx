@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styles from "../styles/modules/button.module.scss";
 
-const Button = ({ name }) => {
+const Button = ({ children }) => {
   const [counterBtn, setCounterBtn] = useState(false);
   const [state, setState] = useState(1);
 
@@ -19,7 +19,7 @@ const Button = ({ name }) => {
     <>
       {!counterBtn && (
         <button className={styles.button} onClick={() => setCounterBtn(true)}>
-          {name}
+          {children}
         </button>
       )}
       {counterBtn && (
