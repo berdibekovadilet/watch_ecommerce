@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 
-import styles from "../styles/modules/product_item.module.scss";
+import styles from "../styles/modules/product_list.module.scss";
 
-const ProductItem = () => {
+const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -14,9 +14,9 @@ const ProductItem = () => {
         console.log(data);
       });
   }, []);
-  
+
   return (
-    <>
+     <div className={styles.wrapper}>
       {products.map((product) => (
         <div className={styles.product__container} key={product.id}>
           <img
@@ -29,8 +29,8 @@ const ProductItem = () => {
           <Button name="В КОРЗИНУ" />
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
-export default ProductItem;
+export default ProductList;
