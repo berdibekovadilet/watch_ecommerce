@@ -12,16 +12,12 @@ const Categories = () => {
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleClick = (index) => {
-    setActiveIndex(index);
-  };
-
   return (
     <ul className={styles.categories__list}>
       {categories.map((category, i) => (
         <li
           key={i}
-          onClick={() => handleClick(i)}
+          onClick={() => setActiveIndex(i)}
           className={activeIndex === i ? styles.active : styles.item}
         >
           {category}

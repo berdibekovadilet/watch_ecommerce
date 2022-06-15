@@ -4,36 +4,31 @@ import { BsFillCaretUpFill } from "react-icons/bs";
 import styles from "../styles/modules/sort.module.scss";
 
 const Sort = () => {
-  const sortArr = [
-    "популярности (возр)",
-    "популярности (убыв)",
-    "цене (возр)",
-    "цене (убыв)",
-    "алфавиту (возр)",
-    "алфавиту (убыв)",
-  ];
-
   const [modal, setModal] = useState(false);
   const [indexActive, setIndexActive] = useState(0);
+  
+  const list = ["популярности", "цене", "алфавиту"];
+  const sortName = list[indexActive];
 
-  const handleClick = (index) => {
-    setIndexActive(index);
+  const clickHandler = (i) => {
+    setIndexActive(i);
+    setModal(false);
   };
 
   return (
-    <div className={styles.sort__container} onClick={() => setModal(!modal)}>
+    <div className={styles.sort__container}>
       <div className={styles.sort__label}>
         <BsFillCaretUpFill />
         <p>Сортировка по:</p>
-        <span>популярности</span>
+        <span onClick={() => setModal(!modal)}>{sortName}</span>
       </div>
       {modal && (
         <div className={styles.sort__popup}>
           <ul>
-            {sortArr.map((item, i) => (
+            {list.map((item, i) => (
               <li
                 key={i}
-                onClick={() => handleClick(i)}
+                onClick={() => clickHandler(i)}
                 className={indexActive === i ? styles.active : ""}
               >
                 {item}
