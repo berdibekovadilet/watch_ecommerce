@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import Button from "./Button";
@@ -6,19 +6,7 @@ import Button from "./Button";
 import styles from "../styles/modules/product_list.module.scss";
 import ProductLoader from "./ProductLoader";
 
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://62a86f40943591102ba204da.mockapi.io/items")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      });
-  }, []);
-
+const ProductList = ({ products, isLoading }) => {
   return (
     <div className={styles.wrapper}>
       {isLoading
