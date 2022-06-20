@@ -14,6 +14,9 @@ const Home = ({ searchValue }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+
   // Category useState
   const [categoryIndex, setCategoryIndex] = useState(0);
 
@@ -31,14 +34,16 @@ const Home = ({ searchValue }) => {
     const category = categoryIndex > 0 ? categoryIndex : "";
     const search = searchValue ? `search=${searchValue}` : "";
     fetch(
-      `${apiAurl}?category=${category}&sortBy=${sortIndex.sortProperty}&${search}`
+      `${apiAurl}?page=${currentPage}&limit=3&category=${category}&sortBy=${sortIndex.sortProperty}&${search}`
     )
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
         setLoading(false);
       });
-  }, [categoryIndex, sortIndex, searchValue]);
+
+    window.scrollTo(0, 0);
+  }, [categoryIndex, sortIndex, searchValue, currentPage]);
   return (
     <>
       <div className={styles.section_wrapper}>
@@ -50,7 +55,7 @@ const Home = ({ searchValue }) => {
       </div>
       <SectionTitle name={"Все часы"} />
       <ProductList products={products} isLoading={isLoading} />
-      <Pagination />
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </>
   );
 };

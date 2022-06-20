@@ -4,6 +4,37 @@
    justify-content: center;
    margin: 4rem 0 1rem;
 
+   li {
+      display: inline-block;
+
+      a {
+         text-align: center;
+         width: 45px;
+         line-height: 42px;
+         height: 45px;
+         border: 1px solid var(--primaryBlue);
+         border-radius: 30px;
+         margin-right: 10px;
+         cursor: pointer;
+         display: inline-block;
+         color: var(--primaryBlue);
+
+         &:hover {
+            background-color: var(--primaryBlue);
+            color: #fff;
+         }
+      }
+   }
+
+   :global {
+      .selected {
+         a {
+            background-color: var(--primaryBlue);
+            color: #fff;
+         }
+      }
+   }
+
    .icon__wrapper {
       color: var(--primaryBlue);
       border: 1px solid var(--primaryBlue);
