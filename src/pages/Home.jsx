@@ -9,7 +9,7 @@ import styles from "../styles/modules/app.module.scss";
 import ProductList from "../components/ProductList";
 import Pagination from "../components/Pagination";
 
-const Home = () => {
+const Home = ({ searchValue }) => {
   // Product useState
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -27,17 +27,18 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
+
+    const category = categoryIndex > 0 ? categoryIndex : "";
+    const search = searchValue ? `search=${searchValue}` : "";
     fetch(
-      `${apiAurl}?category=${categoryIndex > 0 ? categoryIndex : ""}&sortBy=${
-        sortIndex.sortProperty
-      }`
+      `${apiAurl}?category=${category}&sortBy=${sortIndex.sortProperty}&${search}`
     )
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
         setLoading(false);
       });
-  }, [categoryIndex, sortIndex]);
+  }, [categoryIndex, sortIndex, searchValue]);
   return (
     <>
       <div className={styles.section_wrapper}>

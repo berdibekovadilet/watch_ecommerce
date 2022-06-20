@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { BiSearch } from "react-icons/bi";
 import ShoppingCart from "../assets/shopping-cart.svg";
 import styles from "../styles/modules/header.module.scss";
+import Search from "./Search";
 
-const Header = () => {
+const Header = ({ searchValue, setSearchValue }) => {
   return (
     <>
       <div className={styles.wrapper}>
@@ -16,18 +16,7 @@ const Header = () => {
 
           <p>Оригинальные японские часы</p>
         </div>
-        <div className={styles.search__form}>
-          <div className={styles.search__wrapper}>
-            <BiSearch className={styles.icon} />
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Поиск часов..."
-            />
-          </div>
-
-          <button className={styles.search__button}>Поиск</button>
-        </div>
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
         <div className={styles.cart_container}>
           <Link to="cart" className={styles.cart}>
             <span>45,520 ₽</span>
