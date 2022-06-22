@@ -17,17 +17,6 @@ const Pagination = ({ onChangePage }) => {
         renderOnZeroPageCount={null}
       />
     </>
-    // <div className={styles.wrapper}>
-    //   <div className={styles.icon__wrapper}>
-    //     <FaChevronLeft className={styles.icon} />
-    //   </div>
-    //   <div className={styles.active}>1</div>
-    //   <div className={styles.page__item}>2</div>
-    //   <div className={styles.page__item}>3</div>
-    //   <div className={styles.icon__wrapper}>
-    //     <FaChevronRight className={styles.icon} />
-    //   </div>
-    // </div>
   );
 };
 

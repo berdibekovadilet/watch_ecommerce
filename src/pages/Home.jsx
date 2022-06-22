@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId, setSortId } from "../redux/slices/filterSlice";
+import {
+  setCategoryId,
+  setSortId,
+  setPageCount,
+} from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
 
 import Sort from "../components/Sort";
@@ -16,6 +20,7 @@ import { SearchContext } from "../App";
 const Home = () => {
   const categoryIndex = useSelector((state) => state.filter.categoryIndex);
   const sortIndex = useSelector((state) => state.filter.sort);
+  const pageCount = useSelector((state) => state.filter.pageCount);
   const dispatch = useDispatch();
 
   const { searchValue } = useContext(SearchContext);
@@ -25,7 +30,7 @@ const Home = () => {
   const [isLoading, setLoading] = useState(true);
 
   // Pagination
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -33,6 +38,10 @@ const Home = () => {
 
   const onChangeSort = (obj) => {
     dispatch(setSortId(obj));
+  };
+
+  const onChangePage = (number) => {
+    dispatch(setPageCount(number));
   };
 
   const apiAurl = "https://62a86f40943591102ba204da.mockapi.io/items/";
@@ -44,7 +53,7 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
     axios
       .get(
-        `${apiAurl}?page=${currentPage}&limit=6&category=${category}&sortBy=${sortIndex.sortProperty}${search}`
+        `${apiAurl}?page=${pageCount}&limit=6&category=${category}&sortBy=${sortIndex.sortProperty}${search}`
       )
       .then((res) => {
         setProducts(res.data);
@@ -52,7 +61,7 @@ const Home = () => {
       });
 
     window.scrollTo(0, 0);
-  }, [categoryIndex, sortIndex, searchValue, currentPage]);
+  }, [categoryIndex, sortIndex, searchValue, pageCount]);
   return (
     <>
       <div className={styles.section_wrapper}>
@@ -64,7 +73,7 @@ const Home = () => {
       </div>
       <SectionTitle name={"Все часы"} />
       <ProductList products={products} isLoading={isLoading} />
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination onChangePage={onChangePage} />
     </>
   );
 };
