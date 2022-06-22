@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategoryId, setSortId } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
 
 import Sort from "../components/Sort";
@@ -8,8 +10,15 @@ import styles from "../styles/modules/app.module.scss";
 
 import ProductList from "../components/ProductList";
 import Pagination from "../components/Pagination";
+import { SearchContext } from "../App";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const categoryIndex = useSelector((state) => state.filter.categoryIndex);
+  const sortIndex = useSelector((state) => state.filter.sort);
+  const dispatch = useDispatch();
+
+  const { searchValue } = useContext(SearchContext);
+
   // Product useState
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -17,24 +26,24 @@ const Home = ({ searchValue }) => {
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Category useState
-  const [categoryIndex, setCategoryIndex] = useState(0);
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
 
-  // Sort useState
-  const [sortIndex, setSortIndex] = useState({
-    name: "популярности",
-    sortProperty: "rating",
-  });
+  const onChangeSort = (id) => {
+    console.log(id);
+    dispatch(setSortId(id));
+  };
 
-  const apiAurl = "https://62a86f40943591102ba204da.mockapi.io/items";
+  const apiAurl = "https://62a86f40943591102ba204da.mockapi.io/items/";
 
   useEffect(() => {
     setLoading(true);
 
     const category = categoryIndex > 0 ? categoryIndex : "";
-    const search = searchValue ? `search=${searchValue}` : "";
+    const search = searchValue ? `&search=${searchValue}` : "";
     fetch(
-      `${apiAurl}?page=${currentPage}&limit=3&category=${category}&sortBy=${sortIndex.sortProperty}&${search}`
+      `${apiAurl}?page=${currentPage}&limit=6&category=${category}&sortBy=${sortIndex.sortProperty}${search}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -49,9 +58,9 @@ const Home = ({ searchValue }) => {
       <div className={styles.section_wrapper}>
         <Categories
           categoryIndex={categoryIndex}
-          setCategoryIndex={setCategoryIndex}
+          onChangeCategory={onChangeCategory}
         />
-        <Sort sortIndex={sortIndex} setSortIndex={setSortIndex} />
+        <Sort sortIndex={sortIndex} setSortIndex={onChangeSort} />
       </div>
       <SectionTitle name={"Все часы"} />
       <ProductList products={products} isLoading={isLoading} />

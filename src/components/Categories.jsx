@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/modules/categories.module.scss";
 
-const Categories = ({ categoryIndex, setCategoryIndex }) => {
+const Categories = ({ categoryIndex, onChangeCategory }) => {
   const categories = [
     "ВСЕ",
     "G-SHOCK",
@@ -16,7 +16,7 @@ const Categories = ({ categoryIndex, setCategoryIndex }) => {
       {categories.map((category, i) => (
         <li
           key={i}
-          onClick={() => setCategoryIndex(i)}
+          onClick={() => onChangeCategory(i)}
           className={categoryIndex === i ? styles.active : styles.item}
         >
           {category}

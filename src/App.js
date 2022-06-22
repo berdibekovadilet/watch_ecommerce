@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -10,20 +10,24 @@ import ProductDetail from "./pages/ProductDetail";
 
 import styles from "./styles/modules/app.module.scss";
 
+export const SearchContext = createContext();
+
 function App() {
   const [searchValue, setSearchValue] = useState("");
   return (
     <>
       <div className="container">
         <dir className={styles.app_wrapper}>
-          <Header searchValue={searchValue} setSearchValue={setSearchValue} />
-          <Routes>
-            <Route path="/" element={<Home searchValue={searchValue} />}></Route>
-            <Route path="product-detail" element={<ProductDetail />}></Route>
-            <Route path="cart" element={<Cart />}></Route>
+          <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="product-detail" element={<ProductDetail />}></Route>
+              <Route path="cart" element={<Cart />}></Route>
 
-            <Route path="*" element={<Page404 />}></Route>
-          </Routes>
+              <Route path="*" element={<Page404 />}></Route>
+            </Routes>
+          </SearchContext.Provider>
         </dir>
       </div>
     </>

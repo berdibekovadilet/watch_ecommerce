@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { SearchContext } from "../App";
 
 import ShoppingCart from "../assets/shopping-cart.svg";
 import styles from "../styles/modules/header.module.scss";
 import Search from "./Search";
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header = () => {
+  const { searchValue, setSearchValue } = useContext(SearchContext);
   return (
     <>
       <div className={styles.wrapper}>
