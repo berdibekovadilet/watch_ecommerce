@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { BiSearch } from "react-icons/bi";
+import debounce from "lodash.debounce";
 import styles from "../styles/modules/search.module.scss";
+import { useState } from "react";
 
-const Search = ({ searchValue, setSearchValue }) => {
+const Search = ({ setSearchValue }) => {
+  const [value, setValue] = useState("");
+
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 500),
+    []
+  );
+
+  const onChangeInput = (e) => {
+    setValue(e.target.value);
+    updateSearchValue(e.target.value);
+  };
   return (
     <div className={styles.search__form}>
       <div className={styles.search__wrapper}>
@@ -11,8 +26,8 @@ const Search = ({ searchValue, setSearchValue }) => {
           type="text"
           className={styles.input}
           placeholder="Поиск часов..."
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          value={value}
+          onChange={onChangeInput}
         />
       </div>
       <button className={styles.search__button}>Поиск</button>
