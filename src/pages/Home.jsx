@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setCategoryId, setSortId } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
@@ -30,9 +31,8 @@ const Home = () => {
     dispatch(setCategoryId(id));
   };
 
-  const onChangeSort = (id) => {
-    console.log(id);
-    dispatch(setSortId(id));
+  const onChangeSort = (obj) => {
+    dispatch(setSortId(obj));
   };
 
   const apiAurl = "https://62a86f40943591102ba204da.mockapi.io/items/";
@@ -42,12 +42,12 @@ const Home = () => {
 
     const category = categoryIndex > 0 ? categoryIndex : "";
     const search = searchValue ? `&search=${searchValue}` : "";
-    fetch(
-      `${apiAurl}?page=${currentPage}&limit=6&category=${category}&sortBy=${sortIndex.sortProperty}${search}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
+    axios
+      .get(
+        `${apiAurl}?page=${currentPage}&limit=6&category=${category}&sortBy=${sortIndex.sortProperty}${search}`
+      )
+      .then((res) => {
+        setProducts(res.data);
         setLoading(false);
       });
 
