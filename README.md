@@ -5,8 +5,7 @@ https://casiowatch.netlify.app/
 # Covers
 ![cover](cover/1.png)
 ![cover2](cover/2.png)
-![cover3](cover/3.png)
-![cover4](cover/4.png)
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
