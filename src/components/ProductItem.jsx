@@ -30,9 +30,7 @@ const ProductItem = ({ id, title, price, image }) => {
 
   return (
     <div className={styles.product__container} key={id}>
-      <Link to="product-detail">
-        <img className={styles.product__img} alt="productImg" src={image} />
-      </Link>
+      <img className={styles.product__img} alt="productImg" src={image} />
       <h3 className={styles.product__title}>{title}</h3>
       <p className={styles.product__price}>{price} Р</p>
       {!addedCount > 0 && (

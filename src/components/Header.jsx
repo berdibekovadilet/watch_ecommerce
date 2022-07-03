@@ -10,6 +10,7 @@ const Header = () => {
   const { items, totalPrice } = useSelector((state) => state.cart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const { searchValue, setSearchValue } = useContext(SearchContext);
+
   return (
     <>
       <div className={styles.wrapper}>
