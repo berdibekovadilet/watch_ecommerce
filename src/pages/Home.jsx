@@ -13,7 +13,6 @@ import {
   setPageCount,
 } from "../redux/slices/filterSlice";
 import styles from "../styles/modules/app.module.scss";
-import ProductLoader from "../components/ProductLoader";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,8 +21,6 @@ const Home = () => {
   const pageCount = useSelector((state) => state.filter.pageCount);
 
   const { searchValue } = useContext(SearchContext);
-
-  // Product useState
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -41,20 +38,26 @@ const Home = () => {
 
   const apiAurl = "https://62a86f40943591102ba204da.mockapi.io/items/";
 
-  useEffect(() => {
+  const fetchProducts = async () => {
     setLoading(true);
 
     const category = categoryIndex > 0 ? categoryIndex : "";
     const search = searchValue ? `&search=${searchValue}` : "";
-    axios
-      .get(
+    try {
+      const { data } = await axios.get(
         `${apiAurl}?page=${pageCount}&limit=6&category=${category}&sortBy=${sortIndex.sortProperty}${search}`
-      )
-      .then((res) => {
-        setProducts(res.data);
-        setLoading(false);
-      });
+      );
+      setProducts(data);
+    } catch (error) {
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
     window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, [categoryIndex, sortIndex.sortProperty, searchValue, pageCount]);
 
   return (

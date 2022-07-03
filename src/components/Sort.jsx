@@ -24,7 +24,6 @@ const Sort = ({ sortIndex, setSortIndex }) => {
     const handleClickOutside = (event) => {
       if (!event.path.includes(sortRef.current)) {
         setModal(false);
-        console.log("Clicked outside");
       }
     };
     document.body.addEventListener("click", handleClickOutside);

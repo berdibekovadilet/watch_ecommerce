@@ -1,13 +1,27 @@
 import React from "react";
+import CartEmpty from "../components/CartEmpty";
 import Button from "../components/Button";
 import styles from "../styles/modules/cart.module.scss";
+import stylesBtn from "../styles/modules/button.module.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../components/CartItem";
+import { clearItems } from "../redux/slices/cartSlice";
 
 const Cart = ({ id, title, price, image }) => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items);
+  const { totalPrice, items } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
+  const onClickClear = () => {
+    if (window.confirm("Очистить всю корзину?")) {
+      dispatch(clearItems());
+    }
+  };
+
+  if (!totalPrice) {
+    return <CartEmpty />;
+  }
 
   return (
     <>
@@ -16,10 +30,10 @@ const Cart = ({ id, title, price, image }) => {
           <h1 className={styles.title}>Корзина</h1>
           <div className={styles.top}>
             <div className={styles.topText}>
-              Общее количество: <b>2</b>
+              Общее количество: <b>{totalCount} шт</b>
             </div>
             <div className={styles.topText}>
-              Итоговая сумма: <b>19000 руб</b>
+              Итоговая сумма: <b>{totalPrice} руб</b>
             </div>
             <Button type="filled">
               <Link to="/">Перейти к оплате</Link>
@@ -36,9 +50,9 @@ const Cart = ({ id, title, price, image }) => {
             <Button>
               <Link to="/">Вернуться на главную</Link>
             </Button>
-            <Button>
-              <Link to="/">Очистить корзину</Link>
-            </Button>
+            <button className={stylesBtn.button} onClick={onClickClear}>
+              Очистить корзину
+            </button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { plusItem, minusItem } from "../redux/slices/cartSlice";
+import { plusItem, minusItem, removeItem } from "../redux/slices/cartSlice";
 import styles from "../styles/modules/cart.module.scss";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
@@ -15,6 +15,12 @@ const CartItem = ({ id, title, image, price, count }) => {
 
   const onClickMinus = () => {
     dispatch(minusItem(id));
+  };
+
+  const onClickRemove = () => {
+    if (window.confirm("Вы действительно хотите удалить товар?")) {
+      dispatch(removeItem(id));
+    }
   };
 
   return (
@@ -46,7 +52,10 @@ const CartItem = ({ id, title, image, price, count }) => {
         </div>
         <div className={styles.productPrice}>{price * count} руб</div>
         <div className={styles.close}>
-          <AiOutlineCloseCircle style={{ color: "#c4c4c4" }} />
+          <AiOutlineCloseCircle
+            style={{ color: "#c4c4c4" }}
+            onClick={onClickRemove}
+          />
         </div>
       </div>
       <hr className={styles.hr} />
