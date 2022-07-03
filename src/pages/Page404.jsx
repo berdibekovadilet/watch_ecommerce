@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Button from "../components/Button";
-
 import styles from "../styles/modules/page404.module.scss";
 
 const Page404 = () => {

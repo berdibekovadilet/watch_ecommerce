@@ -1,4 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
+import Categories from "../components/Categories";
+import Sort from "../components/Sort";
+import SectionTitle from "../components/SectionTitle";
+import ProductList from "../components/ProductList";
+import Pagination from "../components/Pagination";
+import { SearchContext } from "../App";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -6,31 +12,20 @@ import {
   setSortId,
   setPageCount,
 } from "../redux/slices/filterSlice";
-import Categories from "../components/Categories";
-
-import Sort from "../components/Sort";
-import SectionTitle from "../components/SectionTitle";
-
 import styles from "../styles/modules/app.module.scss";
-
-import ProductList from "../components/ProductList";
-import Pagination from "../components/Pagination";
-import { SearchContext } from "../App";
+import ProductLoader from "../components/ProductLoader";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const categoryIndex = useSelector((state) => state.filter.categoryIndex);
   const sortIndex = useSelector((state) => state.filter.sort);
   const pageCount = useSelector((state) => state.filter.pageCount);
-  const dispatch = useDispatch();
 
   const { searchValue } = useContext(SearchContext);
 
   // Product useState
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(true);
-
-  // Pagination
-  // const [currentPage, setCurrentPage] = useState(1);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -59,9 +54,9 @@ const Home = () => {
         setProducts(res.data);
         setLoading(false);
       });
-
     window.scrollTo(0, 0);
-  }, [categoryIndex, sortIndex, searchValue, pageCount]);
+  }, [categoryIndex, sortIndex.sortProperty, searchValue, pageCount]);
+
   return (
     <>
       <div className={styles.section_wrapper}>
@@ -73,6 +68,7 @@ const Home = () => {
       </div>
       <SectionTitle name={"Все часы"} />
       <ProductList products={products} isLoading={isLoading} />
+
       <Pagination onChangePage={onChangePage} />
     </>
   );
